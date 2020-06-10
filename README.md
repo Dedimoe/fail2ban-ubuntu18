@@ -1,15 +1,24 @@
 # fail2ban-ubuntu18
 fail2ban-ubuntu18
 
+install fail2ban:
+```
 sudo apt-get update
 sudo apt-get install fail2ban
+```
 
+copy config:
+```
 awk '{ printf "# "; print; }' /etc/fail2ban/jail.conf | sudo tee /etc/fail2ban/jail.local
+```
 
+edit config:
+```
 vi /etc/fail2ban/jail.conf
+```
 
-cari dan isi :
-
+find & replace:
+```
 [DEFAULT]
 . . .
 ignoreip = 127.0.0.1/8
@@ -37,13 +46,23 @@ mta = sendmail
 . . .
 action = $(action_)s
 . . .
+```
 
+edit config:
+```
 vi /etc/fail2ban/jail.local
-semua yg ada enabled = true di unremark
+```
+
+unremark which option was: '''enabled = true```:
+```
 . . .
 [jail_to_enable]
 enabled = true
 . . .
+```
 
+activate with this command:
+```
 systemctl enable fail2ban
 systemctl restart fail2ban
+```
